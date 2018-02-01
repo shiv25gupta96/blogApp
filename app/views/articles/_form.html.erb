@@ -1,3 +1,4 @@
+
 <% if @article.errors.any? %>
   <div id="error_explanation">
     <p><h3><%= pluralize(@article.errors.count, "error") %> prohibited this article from being saved.</h3></p>
@@ -9,7 +10,7 @@
   </div>
 <% end %>
 
-<%= form_with model: @article do |f| %>
+<%= form_with model: @article, local: true do |f| %>
   <p>
     <%= f.label :title %><br />
     <%= f.text_field :title %>
