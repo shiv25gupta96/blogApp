@@ -1,7 +1,35 @@
 <h2>Showing <%= @article.title %></h2>
 
-<div>
+<div class="display article">
   <p><strong>Title:&nbsp;</strong><%= @article.title %></p>
   <p><strong>Text:&nbsp;</strong><%= @article.text %></p>
 </div>
+
+<div class = "display comments">
+  <% if @article.comments.empty? %>
+    <p>No Comments found for this Article</p>
+  <% else %>
+    <div class="all_comments">
+      <ul>
+        <% @article.comments.each do |comment| %>
+          <% if !comment.id.nil? %>
+          <li>
+            <div class="comment">
+              <strong>Comment By: <%= comment.user %></strong><br>
+              <%= comment.body %>
+            </div>
+          </li>
+          <% else %>
+            <p>No Comments found for this Article</p>
+          <% end %>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+</div>
+
+<div id="newComment">
+  <%= render 'comments/new' %>
+</div>
+
 <p><%= link_to "Show All Articles", articles_path, html: {class: "button"} %>

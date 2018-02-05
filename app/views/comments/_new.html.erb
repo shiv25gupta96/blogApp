@@ -1,0 +1,24 @@
+  <div class="comments_errors">
+    <% if @comment.errors.any? %>
+      <div class="new_comment">
+        <h4><%= pluralize(@comment.errors.count, "error") %> prohibited the comment to be submitted, please fix these errors.</h4> 
+        <ul>
+          <% @comment.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>        
+  </div>
+
+  <%= form_with model: [@article, @comment] do |fc| %>
+    <p>
+      <%= fc.label "User Name:", :user %><br>
+      <%= fc.text_field :user %>
+    </p>
+    <p>
+      <%= fc.label "Comment:", :body %><br>
+      <%= fc.text_area :body %>
+    </p>
+    <%= fc.submit %>
+  <% end %>
